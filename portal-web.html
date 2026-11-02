@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Autogestión en Discapacidad — Demo Institucional</title>
+    <style>
+        :root {
+            --primary: #3B86B6;
+            --primary-dark: #2A658C;
+            --accent: #F2C12E;
+            --bg-light: #F4F7F9;
+            --white: #FFFFFF;
+            --text-main: #2C3E50;
+            --text-muted: #596A7A;
+            --border-color: #E2E8F0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Barra Superior (Estilo Google Sites) */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .brand img {
+            height: 54px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            letter-spacing: -0.3px;
+        }
+
+        .brand-subtitle {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.92rem;
+            padding: 6px 4px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Encabezado Principal / Banner */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 60px 24px;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        .hero-sub {
+            padding: 40px 24px;
+        }
+
+        .hero-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero-logo {
+            width: 115px;
+            height: 115px;
+            background: var(--white);
+            border-radius: 50%;
+            padding: 6px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.12rem;
+            opacity: 0.95;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 56px 24px;
+        }
+
+        .section-light {
+            background-color: var(--bg-light);
+        }
+
+        .section-white {
+            background-color: var(--white);
+        }
+
+        .section-blue {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 1.85rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .section-blue .section-header h2 {
+            color: var(--white);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .section-blue .section-header p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Grillas */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        /* Tarjetas Paso a Paso */
+        .step-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+            position: relative;
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background-color: var(--accent);
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Tarjetas de Documentación */
+        .doc-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .doc-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .doc-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .doc-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            text-align: center;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: #1A252F;
+        }
+
+        .btn-accent:hover {
+            background-color: #dfb021;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Tarjetas de Formularios */
+        .form-card {
+            background: var(--white);
+            color: var(--text-main);
+            border-radius: var(--radius);
+            padding: 36px 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .form-tag {
+            display: inline-block;
+            background: var(--bg-light);
+            color: var(--primary-dark);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .form-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 14px;
+        }
+
+        .form-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .form-checklist {
+            list-style: none;
+            margin-bottom: 28px;
+            background: var(--bg-light);
+            padding: 16px;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .form-checklist li {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .form-checklist li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Acordeón de Preguntas Frecuentes */
+        .faq-list {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        details {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 18px 22px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        summary {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "▾";
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: transform 0.2s ease;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        details p {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Tarjetas de Contacto */
+        .contact-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .contact-icon {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-card h4 {
+            font-size: 1.05rem;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .contact-card a, .contact-card span {
+            font-size: 0.92rem;
+            color: var(--text-main);
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Subpáginas (Planillas y Nomenclador) */
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        .list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .item-row {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
+        }
+
+        .item-number {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 3px 9px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            width: fit-content;
+        }
+
+        .item-title {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .item-sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Pie de Página */
+        footer {
+            background-color: #1F2D3D;
+            color: #CBD5E1;
+            padding: 36px 24px;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-brand img {
+            height: 48px;
+            background: var(--white);
+            border-radius: 50%;
+            padding: 3px;
+        }
+
+        .footer-brand h4 {
+            color: var(--white);
+            font-size: 1.05rem;
+            margin-bottom: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+            .navbar {
+                justify-content: center;
+            }
+            .nav-links {
+                gap: 12px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegación Superior -->
+    <header>
+        <nav class="navbar">
+            <a onclick="mostrarPagina('home')" class="brand">
+                <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="background: var(--bg-light); padding: 8px; border-radius: 50%;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                <div>
+                    <span class="brand-title">Portal de Discapacidad</span>
+                    <span class="brand-subtitle">Agente del Seguro de Salud — Plataforma Demo</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a id="nav-home" onclick="mostrarPagina('home')" class="active">Inicio</a></li>
+                <li><a id="nav-planillas" onclick="mostrarPagina('planillas')">Planillas</a></li>
+                <li><a id="nav-nomenclador" onclick="mostrarPagina('nomenclador')">Nomenclador</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ==========================================
+             VISTA 1: PÁGINA PRINCIPAL (HOME)
+             ========================================== -->
+        <div id="page-home" class="page-view active">
+            
+            <!-- Bloque A: Banner Principal -->
+            <section id="inicio" class="hero">
+                <div class="hero-container">
+                    <div class="hero-logo" style="display: inline-flex; align-items: center; justify-content: center;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <h1>Portal de Autogestión en Discapacidad</h1>
+                    <p>Gestión digital de prestaciones, acceso a normativa vigente, descarga de planillas oficiales y canal de atención para afiliados y prestadores.</p>
+                </div>
+            </section>
+
+            <!-- Bloque B: Circuito Paso a Paso -->
+            <section id="circuito" class="section-light">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>¿Cómo gestionar tus prestaciones?</h2>
+                        <p>Seguí estos tres pasos para armar y presentar el legajo de discapacidad</p>
+                    </div>
+                    <div class="grid-3">
+                        <div class="step-card">
+                            <div class="step-badge">1</div>
+                            <h3>Leé el Instructivo</h3>
+                            <p>Revisá los requisitos vigentes, la documentación obligatoria y cómo deben confeccionarse los pedidos médicos, presupuestos y planes de trabajo.</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-badge">2</div>
+                            <h3>Descargá las Planillas</h3>
+                            <p>Obtené los formularios oficiales desde este portal para que sean completados, fechados y firmados por los profesionales o instituciones prestadoras.</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-badge">3</div>
+                            <h3>Enviá tu Documentación</h3>
+                            <p>Una vez que tengas todas las planillas completas y escaneadas en formato PDF legible, cargalas a través del formulario digital de presentación.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bloque C: Centro de Descargas -->
+            <section id="documentacion" class="section-white">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Documentación, Planillas y Nomenclador</h2>
+                        <p>Hacé clic en el documento o sección que necesites para visualizar o descargar los archivos.</p>
+                    </div>
+                    <div class="grid-3">
+                        <!-- Tarjeta 1: Instructivo -->
+                        <div class="doc-card">
+                            <div>
+                                <div class="doc-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                </div>
+                                <h3>Instructivo y Normativa</h3>
+                                <p>Guía completa de requisitos administrativos, coberturas, conformidades y pautas de auditoría vigentes para la solicitud de prestaciones.</p>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: En producción, este botón abre el Instructivo oficial en PDF de la entidad.')" class="btn">Descargar Instructivo (PDF)</a>
+                        </div>
+
+                        <!-- Tarjeta 2: Subpágina de Planillas -->
+                        <div class="doc-card">
+                            <div>
+                                <div class="doc-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                </div>
+                                <h3>Planillas Oficiales</h3>
+                                <p>Formularios de solicitud divididos por módulo prestacional: apoyo, escolaridad, maestra de apoyo, transporte, CET/Centro de Día, hogar, AT y asistencia.</p>
+                            </div>
+                            <button onclick="mostrarPagina('planillas')" class="btn">Acceder a las Planillas</button>
+                        </div>
+
+                        <!-- Tarjeta 3: Subpágina de Nomenclador -->
+                        <div class="doc-card">
+                            <div>
+                                <div class="doc-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                </div>
+                                <h3>Nomenclador de Valores</h3>
+                                <p>Consultá y descargá el nomenclador vigente y el registro histórico de aranceles del Sistema Único de Prestaciones Básicas.</p>
+                            </div>
+                            <button onclick="mostrarPagina('nomenclador')" class="btn">Ver Nomenclador Vigente</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bloque D: Ventanilla Digital (Formularios) -->
+            <section id="tramites" class="section-blue">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Gestión de Trámites y Consultas Online</h2>
+                        <p>Seleccioná el formulario correspondiente según el trámite que necesites realizar.</p>
+                    </div>
+                    <div class="grid-2">
+                        <!-- Formulario 1: Presentación de Planillas -->
+                        <div class="form-card">
+                            <div>
+                                <span class="form-tag">Afiliados y Prestadores</span>
+                                <h3 style="display: flex; align-items: center; gap: 8px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    Presentación de Planillas
+                                </h3>
+                                <p>Canal habilitado para el envío de legajos completos de discapacidad (alta de prestaciones, renovaciones anuales o modificaciones).</p>
+                                <ul class="form-checklist">
+                                    <li>✔ Verificá que las planillas tengan firma, sello profesional y fecha legible.</li>
+                                    <li>✔ Adjuntá la documentación completa en formato PDF (sin tachaduras ni enmiendas).</li>
+                                    <li>✔ Tené a mano el DNI/CUIL del afiliado titular y del beneficiario.</li>
+                                </ul>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: En producción, este botón redirige al formulario de carga de legajos vinculado al almacenamiento de la entidad.')" class="btn btn-accent">Subir Planillas Completadas</a>
+                        </div>
+
+                        <!-- Formulario 2: Consultas de Facturación -->
+                        <div class="form-card">
+                            <div>
+                                <span class="form-tag">Exclusivo Prestadores</span>
+                                <h3 style="display: flex; align-items: center; gap: 8px;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                    Consultas de Facturación
+                                </h3>
+                                <p>Canal exclusivo para profesionales, centros e instituciones prestadoras que requieran consultar el estado de facturas o liquidaciones.</p>
+                                <ul class="form-checklist">
+                                    <li>✔ Informá el CUIT y Razón Social / Nombre del prestador.</li>
+                                    <li>✔ Indicá punto de venta, número de comprobante y período facturado.</li>
+                                    <li>✔ Consigná el DNI y nombre completo del afiliado correspondiente.</li>
+                                </ul>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: En producción, este botón abre el formulario de consulta con respuesta automatizada por correo electrónico.')" class="btn">Realizar Consulta de Facturación</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bloque E: Preguntas Frecuentes -->
+            <section id="preguntas" class="section-light">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Preguntas Frecuentes</h2>
+                        <p>Respuestas rápidas a las consultas más habituales antes de enviar la documentación.</p>
+                    </div>
+                    <div class="faq-list">
+                        <details open>
+                            <summary>¿En qué formato debo subir las planillas completadas?</summary>
+                            <p>Toda la documentación debe adjuntarse en formato <strong>PDF legible</strong> (preferentemente escaneada, evitando fotografías oscuras o cortadas) para agilizar el control administrativo y la auditoría médica.</p>
+                        </details>
+                        <details>
+                            <summary>¿Qué sucede si la documentación presentada tiene errores o está incompleta?</summary>
+                            <p>El equipo de Auditoría de Discapacidad revisará los archivos enviados y, en caso de requerir alguna rectificación o documento faltante, se comunicará al correo electrónico declarado en el formulario detallando el motivo.</p>
+                        </details>
+                        <details>
+                            <summary>¿Las fechas de los pedidos médicos y los presupuestos deben cumplir algún requisito?</summary>
+                            <p>Sí. Es fundamental verificar en el Instructivo vigente la correlación de fechas entre la prescripción médica, el presupuesto y el plan de trabajo, así como que no existan tachaduras ni correcciones sin salvar por el profesional.</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bloque F: Contactos -->
+            <section id="contactos" class="section-white">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Contactos</h2>
+                        <p>Canales oficiales de comunicación del Área de Discapacidad de la entidad.</p>
+                    </div>
+                    <div class="grid-4">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            </div>
+                            <h4>Teléfono</h4>
+                            <span>(011) 0800-000-SALUD</span>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <h4>Consultas</h4>
+                            <a href="mailto:discapacidad@salud.org.ar">discapacidad@salud.org.ar</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            </div>
+                            <h4>Auditoría</h4>
+                            <a href="mailto:auditoria@esalud.org.ar">discapacidad@salud.org.ar</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                            <h4>Medicación e insumos</h4>
+                            <a href="mailto:insumos@salud.org.ar">insumos@salud.org.ar</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==========================================
+             VISTA 2: SUBPÁGINA DE PLANILLAS OFICIALES
+             ========================================== -->
+        <div id="page-planillas" class="page-view">
+            <section class="hero hero-sub">
+                <div class="hero-container">
+                    <button onclick="mostrarPagina('home')" class="btn btn-outline">← Volver al Inicio</button>
+                    <h1>Planillas Oficiales</h1>
+                    <p>Seleccioná el módulo prestacional correspondiente para descargar las planillas en formato PDF.</p>
+                </div>
+            </section>
+
+            <section class="section-light">
+                <div class="container">
+                    <div class="list-grid">
+                        <!-- Opción 1 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 1</span>
+                                <div class="item-title">1.- Prestaciones de Apoyo y Rehabilitación</div>
+                                <div class="item-sub">Formularios para terapias de apoyo, consultorio externo y rehabilitación integral.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de Apoyo y Rehabilitación (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 2 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 2</span>
+                                <div class="item-title">2.- Escolaridad y Formación Laboral</div>
+                                <div class="item-sub">Documentación para escuelas especiales, educativas y talleres de formación laboral.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de Escolaridad y Formación Laboral (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 3 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 3</span>
+                                <div class="item-title">3.- Maestra de Apoyo y Apoyo a la Integración Escolar</div>
+                                <div class="item-sub">Planillas para proyectos de inclusión escolar con profesional o equipo de apoyo.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de Integración Escolar (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 4 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 4</span>
+                                <div class="item-title">4.- Transporte</div>
+                                <div class="item-sub">Solicitud de traslado especial, declaración de recorridos, kilometraje y conformidad.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de Transporte (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 5 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 5</span>
+                                <div class="item-title">5.- Centros Educativos Terapéuticos y Centros de Día</div>
+                                <div class="item-sub">Formularios específicos para prestaciones institucionales en jornada simple o doble.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de CET y Centro de Día (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 6 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 6</span>
+                                <div class="item-title">6.- Hogar</div>
+                                <div class="item-sub">Planillas de solicitud y auditoría para modalidades de alojamiento permanente o semanal.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de Hogar (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 7 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 7</span>
+                                <div class="item-title">7.- Acompañamiento Terapéutico</div>
+                                <div class="item-sub">Pedido médico, plan de abordaje, presupuesto y requisitos del acompañante terapéutico.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de planillas de Acompañamiento Terapéutico (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <!-- Opción 8 -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Opción 8</span>
+                                <div class="item-title">8.- Planilla de Asistencia</div>
+                                <div class="item-sub">Registro mensual de concurrencia y firmas para adjuntar con la facturación prestacional.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Planilla de Asistencia mensual (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==========================================
+             VISTA 3: SUBPÁGINA DE NOMENCLADOR DE VALORES
+             ========================================== -->
+        <div id="page-nomenclador" class="page-view">
+            <section class="hero hero-sub">
+                <div class="hero-container">
+                    <button onclick="mostrarPagina('home')" class="btn btn-outline">← Volver al Inicio</button>
+                    <h1>Nomenclador de Valores</h1>
+                    <p>Seleccioná el período o resolución que deseás consultar para descargar la tabla de aranceles en formato PDF.</p>
+                </div>
+            </section>
+
+            <section class="section-light">
+                <div class="container">
+                    <div class="list-grid">
+                        <!-- Vigente -->
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Vigente</span>
+                                <div class="item-title">Nomenclador de Aranceles Vigente (Última Actualización)</div>
+                                <div class="item-sub">Valores actuales del Sistema Único de Prestaciones Básicas para Personas con Discapacidad.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga del Nomenclador Vigente en PDF.')" class="btn btn-accent">📊 Descargar Vigente (PDF)</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number">Vigente</span>
+                                <div class="item-title">Nomenclador de Aranceles (Histórico Excel)</div>
+                                <div class="item-sub">Valores históricos del Sistema Único de Prestaciones Básicas para Personas con Discapacidad en formato Excel.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de base histórica de aranceles en formato Excel.')" class="btn btn-accent">📊 Descargar Excel</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Octubre 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Octubre 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Septiembre 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Septiembre 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Agosto 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Agosto 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Julio 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Julio 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Junio 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Junio 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Mayo 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Mayo 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+
+                        <div class="item-row">
+                            <div>
+                                <span class="item-number" style="background:#E2E8F0;">Histórico</span>
+                                <div class="item-title">Nomenclador – Abril 2026</div>
+                                <div class="item-sub">Tabla de valores de referencia para facturación o auditoría de períodos anteriores.</div>
+                            </div>
+                            <a href="javascript:void(0)" onclick="alert('Demo interactiva: Descarga de Nomenclador Abril 2026 (PDF).')" class="btn">📄 Descargar PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="background: var(--white); padding: 8px; border-radius: 50%;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                <div>
+                    <h4>Portal Integral de Discapacidad (Demo Ciclo 2027)</h4>
+                    <span>Plataforma de Autogestión para Afiliados y Prestadores</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function mostrarPagina(pagina) {
+            // Ocultar todas las vistas
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            // Quitar clase activa del menú
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Mostrar la vista seleccionada
+            const vistaActiva = document.getElementById('page-' + pagina);
+            if (vistaActiva) {
+                vistaActiva.classList.add('active');
+            }
+
+            // Marcar el botón activo en el navegador
+            const navActivo = document.getElementById('nav-' + pagina);
+            if (navActivo) {
+                navActivo.classList.add('active');
+            }
+
+            // Subir al inicio suavemente
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
